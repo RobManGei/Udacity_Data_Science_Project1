@@ -30,20 +30,24 @@ This repository uses data from https://github.com/owid/covid-19-data/tree/master
 Detailed description
 
 Business Understanding
+
 This project aims at using the CRISP-DM process. In particular, I analysed data with regard to COVID-19 to answer the following questions:
 -When will herd immunity will be reached?
 -What factors from the data contribute to a high COVID-19 vaccination rate?
 -What factors from the data contribute to a high COVID-19 death rate?
 
 Data Understanding
+
 This repository uses data from https://github.com/owid/covid-19-data/tree/master/public/data. The datafile contains entries for every day and a lot of countries since March 2020. In the columns, specific data is some form related to COVID-a9 are stored. For instance, the total number of COVID-19 cases, the number of people vaccinated and the total number of deaths in a given country. In addition, the data contains smoothed data and data per a certain number of inhabitants (i.e. number of deaths per million). Furthermore, the data contains some parameters describing the environment in a given country (i.e. human development index, mean age of the population, population and more). A description of each colum is provided in https://github.com/owid/covid-19-data/tree/master/public/data. I wanted to find out, how the vaccination process is going and how the different factors in the data contribute to vaccination rates and number of deaths.
 
 Prepare Data
+
 In this step, the data was cleaned. Generally, I dropped all the rows that did not contain data for the colum that was relevant for the respective question. For example, for the number of people fully vaccinated in the first question, I dropped all rows that did not contain data in that column. Most of the data did not contain an entry for dated before the start of the vaccination process, so they were irrelevant. Sometimes a value was missing for a day or two but imputing those values did not make too much sense before the modeling of the data. Any imputed value would have biased the data, especially when using all conties to impute the data because the countries differ too much.
 
 The same is true for the two other questions. I dropped the rows that did not contain data for the column in question. Then, I selected one (most recent) date with the biggest number of entries. I dropped all other dates because if you are using all datesm the data will get biased by the multiple entries for each country. I also dropped the "absolute" colums becase I was interested in the normalized data (per hundred, thousand, million). Furthermore, I dropped colums that did not contain values. As discussed, imputing values doeas not make sense due to the vast differences in the individual countries.
 
 Data Modeling
+
 In this step, I created models for the three questions above. For the first question, I used data from Germany and the USA to model a prediction for the number of people vaccinated over time. I wanted to find out, when 80% of the respective popuation is fully vaccinated. I fitted a linear regression model with a 2nd degree polynomial to the data and predicted the numbers for the future.
 
 For the second question, I tried to fit a linear regression model in order to find our what contributing factors are in the data to a high vaccination rate. I searched for an optimal model variying the number of features used for the model.
@@ -51,6 +55,7 @@ For the second question, I tried to fit a linear regression model in order to fi
 For the third question I did the same thing, trying to find out what factors contribute to the death rate for a given country.
 
 Evaluate the Results
+
 For question 1, I came up with the following graph:
 
 ![figure1](https://user-images.githubusercontent.com/65665840/112831269-00540d00-9094-11eb-938f-ce05a50f43d3.png)
